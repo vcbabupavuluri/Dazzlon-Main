@@ -1,0 +1,68 @@
+/* ==========================================================================
+   Dazzlon Motion-Graphics Enhancements: SVG Drawing & Page Transitions
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   PART 1: High-Quality SVG Service & Industry Icons
+   -------------------------------------------------------------------------- */
+.service-icon {
+  display: block;
+  width: 40px;
+  height: 40px;
+  overflow: visible;
+  stroke: currentColor;
+}
+
+.service-icon path,
+.service-icon line,
+.service-icon polyline,
+.service-icon polygon,
+.service-icon circle,
+.service-icon rect,
+.service-icon ellipse {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Page wipe transition */
+/* --------------------------------------------------------------------------
+   PART 2: Page Transition Wipe Effect
+   -------------------------------------------------------------------------- */
+#page-transition-panel {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+  background-color: var(--navy, #031321);
+  z-index: 999999;
+  pointer-events: none !important;
+  visibility: hidden;
+  transform: translateY(100%);
+  will-change: transform;
+}
+
+/* Exit: wipes up from bottom to fully cover viewport */
+#page-transition-panel.wipe-exit {
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto !important;
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Enter: starts covering, wipes away to top */
+#page-transition-panel.wipe-enter {
+  visibility: visible;
+  transform: translateY(-100%);
+  pointer-events: none !important;
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Immediate cover on destination load if transitioning */
+#page-transition-panel.wipe-covered {
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto !important;
+  transition: none;
+}
+
